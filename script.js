@@ -29,9 +29,14 @@ teclasOperadoras.forEach((tecla) => tecla.addEventListener('click', selecionaOpe
 
 const calcular = () => {
     const numeroAtual = display.textContent;
-    const resultado = eval(`${numeroAnterior}${operador}${numeroAtual}`); //usando template string
+    var n1 = parseFloat(numeroAtual.replace(',', '.'));
+    var n2 = parseFloat(numeroAnterior.replace(',', '.'));
+
+    const resultado = eval(`${n1}${operador}${n2}`); //usando template string
+    
+    var resultadoFinal = parseFloat(resultado);
     numeroNovo = true;
-    atualizarDisplay(resultado);
+    atualizarDisplay(resultadoFinal.toString().replace('.', ','));
 }
 
 result.addEventListener('click', calcular);
@@ -60,3 +65,9 @@ const inverterSinal = () => {
 }
 
 document.querySelector("#inverter").addEventListener("click", inverterSinal);
+
+const adicionarDecimal = () => {
+    (display.textContent = display.textContent.concat(","));
+    numeroNovo = false;
+}
+document.querySelector("#decimal").addEventListener("click", adicionarDecimal);
